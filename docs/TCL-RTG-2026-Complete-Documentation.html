@@ -1,0 +1,2479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TCL × Arsenal Road to Greatness 2026 — Complete Documentation</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0A0A0F;
+      --bg-secondary: #12121A;
+      --bg-card: #1A1A25;
+      --bg-sidebar: #0D0D14;
+      --red: #E4002B;
+      --red-dark: #B8001F;
+      --red-glow: rgba(228, 0, 43, 0.3);
+      --gold: #FFD700;
+      --green: #22C55E;
+      --blue: #3B82F6;
+      --purple: #A855F7;
+      --cyan: #06B6D4;
+      --orange: #F97316;
+      --text-primary: #FFFFFF;
+      --text-secondary: #A0A0B0;
+      --text-muted: #6B6B80;
+      --border: #2A2A3A;
+      --radius: 12px;
+      --sidebar-width: 280px;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ===== SIDEBAR / TABLE OF CONTENTS ===== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      z-index: 100;
+      padding: 20px 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .sidebar-header {
+      padding: 10px 20px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+
+    .sidebar-header h2 {
+      font-size: 14px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-header p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .toc-list { list-style: none; }
+
+    .toc-list li a {
+      display: block;
+      padding: 8px 20px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .toc-list li a:hover,
+    .toc-list li a.active {
+      color: var(--text-primary);
+      background: rgba(228, 0, 43, 0.08);
+      border-left-color: var(--red);
+    }
+
+    .toc-list li a .toc-number {
+      color: var(--red);
+      font-weight: 700;
+      margin-right: 6px;
+      font-size: 11px;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, #1a0008 50%, var(--bg-primary) 100%);
+      border-bottom: 2px solid var(--red);
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 50% 50%, var(--red-glow) 0%, transparent 50%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 0%, #E4002B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .tagline {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .hero .badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .badge.red { border-color: var(--red); color: var(--red); }
+    .badge.green { border-color: var(--green); color: var(--green); }
+    .badge.blue { border-color: var(--blue); color: var(--blue); }
+    .badge.gold { border-color: var(--gold); color: var(--gold); }
+
+    /* Section Styles */
+    .section {
+      padding: 50px 40px;
+      border-bottom: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-number {
+      background: var(--red);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .section-header .section-emoji {
+      font-size: 28px;
+    }
+
+    /* Content helpers */
+    .analogy {
+      background: linear-gradient(135deg, rgba(228, 0, 43, 0.1), rgba(228, 0, 43, 0.05));
+      border-left: 4px solid var(--red);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 20px 0;
+      font-size: 15px;
+    }
+
+    .analogy::before {
+      content: '💡 ';
+      font-size: 18px;
+    }
+
+    .info-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .info-box.warning {
+      border-color: var(--orange);
+      background: rgba(249, 115, 22, 0.08);
+    }
+
+    .info-box.success {
+      border-color: var(--green);
+      background: rgba(34, 197, 94, 0.08);
+    }
+
+    p { margin-bottom: 14px; color: var(--text-secondary); }
+    p strong { color: var(--text-primary); }
+
+    h3 {
+      font-size: 20px;
+      color: var(--text-primary);
+      margin: 28px 0 12px;
+    }
+
+    h4 {
+      font-size: 16px;
+      color: var(--red);
+      margin: 20px 0 8px;
+    }
+
+    ul, ol {
+      margin: 10px 0 16px 24px;
+      color: var(--text-secondary);
+    }
+
+    li { margin-bottom: 6px; }
+    li strong { color: var(--text-primary); }
+
+    /* Mermaid diagrams */
+    .mermaid-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    th {
+      background: var(--bg-card);
+      color: var(--red);
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--red);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    tr:hover td { background: rgba(228, 0, 43, 0.04); }
+
+    code {
+      background: var(--bg-card);
+      color: var(--red);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    }
+
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      overflow-x: auto;
+      margin: 16px 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: var(--text-secondary);
+    }
+
+    /* Tech Grid */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .tech-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .tech-card:hover {
+      border-color: var(--red);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(228, 0, 43, 0.15);
+    }
+
+    .tech-card .tech-icon { font-size: 36px; margin-bottom: 10px; }
+    .tech-card .tech-name { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .tech-card .tech-role { font-size: 12px; color: var(--text-muted); }
+    .tech-card .tech-version { font-size: 11px; color: var(--red); margin-top: 4px; }
+
+    /* Wireframe Styles */
+    .wireframe {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin: 20px 0;
+    }
+
+    .wireframe-title {
+      text-align: center;
+      font-size: 14px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .wire-box {
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 6px 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .wire-box.header { border-color: var(--red); color: var(--red); background: rgba(228, 0, 43, 0.08); }
+    .wire-box.hero-area { border-color: var(--gold); color: var(--gold); min-height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255, 215, 0, 0.05); }
+    .wire-box.nav { border-color: var(--blue); color: var(--blue); background: rgba(59, 130, 246, 0.08); }
+    .wire-box.card { border-color: var(--purple); color: var(--purple); background: rgba(168, 85, 247, 0.05); }
+    .wire-box.sidebar-area { border-color: var(--cyan); color: var(--cyan); background: rgba(6, 182, 212, 0.08); }
+    .wire-box.action { border-color: var(--green); color: var(--green); background: rgba(34, 197, 94, 0.08); }
+    .wire-box.content { border-color: var(--text-muted); min-height: 60px; display: flex; align-items: center; justify-content: center; }
+
+    .wire-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .wire-row > * { flex: 1; }
+
+    .wire-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .wire-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .wire-admin-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      grid-template-rows: 50px 1fr;
+      gap: 8px;
+      min-height: 400px;
+    }
+
+    .wire-admin-sidebar { grid-row: 1 / 3; }
+
+    /* Reference Cards */
+    .ref-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 16px 0;
+      page-break-inside: avoid;
+    }
+
+    .ref-card h4 {
+      margin-top: 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Glossary */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .glossary-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+    }
+
+    .glossary-term {
+      font-weight: 700;
+      color: var(--red);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .glossary-def {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    /* Role hierarchy */
+    .role-card {
+      background: var(--bg-card);
+      border-left: 4px solid var(--red);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 16px 20px;
+      margin: 10px 0;
+    }
+
+    .role-card.super { border-left-color: var(--gold); }
+    .role-card.admin { border-left-color: var(--red); }
+    .role-card.captain { border-left-color: var(--blue); }
+    .role-card.fan { border-left-color: var(--green); }
+
+    .role-name {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .role-card.super .role-name { color: var(--gold); }
+    .role-card.admin .role-name { color: var(--red); }
+    .role-card.captain .role-name { color: var(--blue); }
+    .role-card.fan .role-name { color: var(--green); }
+
+    /* Mobile hamburger */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 200;
+      background: var(--red);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .menu-toggle { display: block; }
+      .main { margin-left: 0; }
+      .section { padding: 30px 20px; }
+      .hero { padding: 40px 20px; }
+      .hero h1 { font-size: 28px; }
+      .tech-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .wire-row { flex-direction: column; }
+      .wire-grid-3, .wire-grid-4 { grid-template-columns: 1fr 1fr; }
+      .wire-admin-layout { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr; }
+      .wire-admin-sidebar { grid-row: auto; }
+      .glossary-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+      .sidebar, .menu-toggle { display: none !important; }
+      .main { margin-left: 0 !important; }
+      body { background: white; color: black; }
+      .hero { background: white; border-bottom: 2px solid #E4002B; }
+      .hero h1 { -webkit-text-fill-color: #E4002B; color: #E4002B; }
+      .hero .tagline { color: #333; }
+      .section { padding: 20px 0; page-break-inside: avoid; }
+      .section-header { page-break-after: avoid; }
+      .mermaid-wrapper { border: 1px solid #ccc; page-break-inside: avoid; }
+      p, td, li, .glossary-def, .analogy { color: #333; }
+      th { color: #E4002B; }
+      .tech-card, .info-box, .ref-card, .glossary-item, .role-card { border-color: #ccc; background: #f9f9f9; }
+      .wireframe { background: #f5f5f5; }
+      code { background: #f0f0f0; color: #E4002B; }
+      pre { background: #f5f5f5; border-color: #ccc; }
+      h2, h3, h4, .role-name, .glossary-term, .tech-name { color: #111 !important; -webkit-text-fill-color: #111 !important; }
+      a { color: #E4002B; }
+      @page { margin: 1.5cm; size: A4; }
+    }
+
+    /* Scroll offset for anchor links */
+    [id] { scroll-margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<!-- Mobile Menu Toggle -->
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Toggle menu">☰</button>
+
+<!-- ===== SIDEBAR / TABLE OF CONTENTS ===== -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h2>📋 Contents</h2>
+    <p>TCL × Arsenal RTG 2026</p>
+  </div>
+  <ul class="toc-list">
+    <li><a href="#section-1"><span class="toc-number">01</span> Project Overview</a></li>
+    <li><a href="#section-2"><span class="toc-number">02</span> System Architecture</a></li>
+    <li><a href="#section-3"><span class="toc-number">03</span> How Users Use the App</a></li>
+    <li><a href="#section-4"><span class="toc-number">04</span> Authentication Flow</a></li>
+    <li><a href="#section-5"><span class="toc-number">05</span> Database Schema</a></li>
+    <li><a href="#section-6"><span class="toc-number">06</span> Page Map / Sitemap</a></li>
+    <li><a href="#section-7"><span class="toc-number">07</span> API Route Map</a></li>
+    <li><a href="#section-8"><span class="toc-number">08</span> Match Day Workflow</a></li>
+    <li><a href="#section-9"><span class="toc-number">09</span> Data Flow</a></li>
+    <li><a href="#section-10"><span class="toc-number">10</span> Deployment Pipeline</a></li>
+    <li><a href="#section-11"><span class="toc-number">11</span> User Roles</a></li>
+    <li><a href="#section-12"><span class="toc-number">12</span> Campaign State Machine</a></li>
+    <li><a href="#section-13"><span class="toc-number">13</span> Match Status States</a></li>
+    <li><a href="#section-14"><span class="toc-number">14</span> Wireframes</a></li>
+    <li><a href="#section-15"><span class="toc-number">15</span> Tech Stack Visual</a></li>
+    <li><a href="#section-16"><span class="toc-number">16</span> Quick Reference Cards</a></li>
+    <li><a href="#section-17"><span class="toc-number">17</span> Glossary</a></li>
+  </ul>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main">
+
+  <!-- Hero Banner -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>TCL × Arsenal<br>Road to Greatness 2026</h1>
+      <p class="tagline">Inspire It. Dream It. Do It. — Complete App Documentation</p>
+      <div class="badges">
+        <span class="badge red">🏆 16 Teams</span>
+        <span class="badge gold">⚽ 31 Matches</span>
+        <span class="badge blue">📡 46 APIs</span>
+        <span class="badge green">📱 26 Pages</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: PROJECT OVERVIEW -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-1">
+    <div class="section-header">
+      <div class="section-number">01</div>
+      <span class="section-emoji">🌍</span>
+      <h2>Project Overview</h2>
+    </div>
+
+    <div class="analogy">Think of this app like a <strong>digital stadium</strong>. Fans walk in the front door to watch matches and check scores. Captains have a special locker room where they manage their teams. And admins sit in the control room, running everything behind the scenes.</div>
+
+    <p>The <strong>TCL × Arsenal Road to Greatness 2026</strong> app is a complete tournament management platform for a grassroots football (soccer) tournament in the UAE. It's sponsored by TCL Electronics and officially connected with Arsenal Football Club.</p>
+
+    <h3>🎯 What Does It Do?</h3>
+    <ul>
+      <li><strong>For Fans:</strong> Browse matches, check live scores, view standings, explore teams, watch highlights, and learn about prizes — all from their phone.</li>
+      <li><strong>For Captains:</strong> Manage their team rosters, submit kit sizes, and sign agreements.</li>
+      <li><strong>For Admins:</strong> Control everything — create matches, manage teams, publish content, send notifications, and run the entire tournament.</li>
+    </ul>
+
+    <h3>📊 By The Numbers</h3>
+    <table>
+      <tr><th>What</th><th>Count</th><th>Think of it like...</th></tr>
+      <tr><td>Teams</td><td>16</td><td>🏟️ 16 little league teams competing</td></tr>
+      <tr><td>Groups</td><td>4</td><td>📁 4 folders organizing the teams</td></tr>
+      <tr><td>Matches</td><td>31</td><td>⚽ 31 games to be played</td></tr>
+      <tr><td>Database Models</td><td>27+</td><td>📋 27+ types of things we keep track of</td></tr>
+      <tr><td>API Routes</td><td>46</td><td>🚪 46 doors to get or change information</td></tr>
+      <tr><td>Pages</td><td>26</td><td>📄 26 different screens users can see</td></tr>
+    </table>
+
+    <h3>🗺️ The Big Picture</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+mindmap
+  root((TCL × Arsenal\nRoad to Greatness))
+    Consumer App
+      Home Page
+      Matches
+      Standings
+      Teams
+      FAQ
+      Highlights
+      Prize
+      Zone
+    Admin Portal
+      Dashboard
+      Match Management
+      Team Management
+      Content CMS
+      Notifications
+      User Management
+    Captain Area
+      My Team
+      Roster
+      Kit Sizes
+      Agreements
+    Backend
+      46 API Routes
+      PostgreSQL Database
+      JWT Authentication
+      Cloudinary Media
+      </pre>
+    </div>
+
+    <h3>🔗 Key Links</h3>
+    <table>
+      <tr><th>Resource</th><th>URL</th></tr>
+      <tr><td>🌐 Live App</td><td><code>https://tcl-app.vercel.app</code></td></tr>
+      <tr><td>🔧 Admin Portal</td><td><code>https://tcl-app.vercel.app/admin</code></td></tr>
+      <tr><td>💻 GitHub Repo</td><td><code>https://github.com/nkhank1991/tcl-rtg-2026</code></td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: SYSTEM ARCHITECTURE -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-2">
+    <div class="section-header">
+      <div class="section-number">02</div>
+      <span class="section-emoji">🏗️</span>
+      <h2>System Architecture</h2>
+    </div>
+
+    <div class="analogy">Imagine a <strong>restaurant</strong>. The customer (user) sits at a table (browser). The waiter (Next.js) takes orders and brings food. The kitchen (API routes) prepares the food. The pantry (database) stores all the ingredients. And the photo studio (Cloudinary) handles all the pretty pictures of food for the menu.</div>
+
+    <p>Our app uses a <strong>monolithic</strong> architecture — that means everything lives in one place (one Next.js app). This keeps things simple! The frontend (what you see) and the backend (what does the work) are both inside the same project.</p>
+
+    <h3>🏛️ Architecture Diagram</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TB
+    subgraph Users["👥 Users"]
+        FAN["📱 Fan\n(Phone Browser)"]
+        CAPTAIN["🧑‍✈️ Captain\n(Phone Browser)"]
+        ADMIN["🔧 Admin\n(Desktop Browser)"]
+    end
+
+    subgraph Vercel["☁️ Vercel Cloud"]
+        subgraph NextJS["⚡ Next.js 16 App"]
+            PAGES["📄 26 Pages\n(React 19 + Tailwind 4)"]
+            API["🚪 46 API Routes\n(Server-side)"]
+            MW["🛡️ Middleware\n(Auth checks)"]
+        end
+    end
+
+    subgraph Data["💾 Data Layer"]
+        PRISMA["🔮 Prisma 7 ORM"]
+        NEON["🐘 Neon PostgreSQL\n(Serverless DB)"]
+    end
+
+    subgraph Media["🖼️ Media"]
+        CLOUD["☁️ Cloudinary CDN\n(Images & Videos)"]
+    end
+
+    FAN -->|"HTTPS"| PAGES
+    CAPTAIN -->|"HTTPS"| PAGES
+    ADMIN -->|"HTTPS"| PAGES
+
+    PAGES -->|"fetch()"| API
+    MW -->|"Checks JWT"| API
+    API -->|"Queries"| PRISMA
+    PRISMA -->|"SQL"| NEON
+    API -->|"Upload"| CLOUD
+    PAGES -->|"Display"| CLOUD
+
+    style Users fill:#1a1a25,stroke:#E4002B,color:#fff
+    style Vercel fill:#0d0d14,stroke:#3B82F6,color:#fff
+    style NextJS fill:#12121a,stroke:#3B82F6,color:#fff
+    style Data fill:#0d0d14,stroke:#22C55E,color:#fff
+    style Media fill:#0d0d14,stroke:#F97316,color:#fff
+      </pre>
+    </div>
+
+    <h3>🧱 Layer by Layer</h3>
+    <table>
+      <tr><th>Layer</th><th>Technology</th><th>Job</th></tr>
+      <tr><td>🎨 Presentation</td><td>React 19 + Tailwind CSS 4</td><td>What users see and click on</td></tr>
+      <tr><td>🚦 Routing</td><td>Next.js 16 App Router</td><td>Decides which page to show</td></tr>
+      <tr><td>🛡️ Middleware</td><td>Next.js Middleware + JWT</td><td>Checks if you're allowed in</td></tr>
+      <tr><td>⚙️ Business Logic</td><td>API Routes + Zod 4</td><td>Processes requests and validates data</td></tr>
+      <tr><td>🗄️ Data Access</td><td>Prisma 7 ORM</td><td>Talks to the database in a friendly way</td></tr>
+      <tr><td>💾 Storage</td><td>Neon PostgreSQL</td><td>Stores all the information permanently</td></tr>
+      <tr><td>🖼️ Media</td><td>Cloudinary</td><td>Stores and serves images/videos super fast</td></tr>
+      <tr><td>📦 Caching</td><td>TanStack Query 5</td><td>Remembers data so we don't ask again too soon</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: HOW USERS USE THE APP -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-3">
+    <div class="section-header">
+      <div class="section-number">03</div>
+      <span class="section-emoji">👤</span>
+      <h2>How Users Use the App</h2>
+    </div>
+
+    <div class="analogy">It's like a <strong>theme park with different wristbands</strong>. Everyone can enter the main area (public pages). Captains get a blue wristband for the team locker rooms. Admins get a gold wristband for the control tower. Each wristband unlocks different areas!</div>
+
+    <h3>📱 Fan Journey — "I just want to watch!"</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor Fan as 📱 Fan
+    participant Home as 🏠 Home Page
+    participant Matches as ⚽ Matches Page
+    participant Detail as 📋 Match Detail
+    participant Stand as 📊 Standings
+    participant Teams as 🏟️ Teams
+
+    Fan->>Home: Opens tcl-app.vercel.app
+    Home-->>Fan: Shows hero carousel, upcoming matches
+    Fan->>Matches: Taps "Matches" in bottom nav
+    Matches-->>Fan: Shows all matches with filters
+    Fan->>Detail: Taps on a match card
+    Detail-->>Fan: Shows score, events, lineups
+    Fan->>Stand: Taps "Standings" tab
+    Stand-->>Fan: Shows group tables with points
+    Fan->>Teams: Taps "Teams" tab
+    Teams-->>Fan: Shows all 16 teams with logos
+      </pre>
+    </div>
+
+    <h3>🧑‍✈️ Captain Journey — "I manage my team!"</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor Cap as 🧑‍✈️ Captain
+    participant Login as 🔐 Login Page
+    participant OTP as 📲 OTP Verify
+    participant MyTeam as 👥 My Team
+    participant Roster as 📋 Roster
+    participant Kit as 👕 Kit Sizes
+
+    Cap->>Login: Goes to /login
+    Login->>Cap: Enter your phone number
+    Cap->>Login: Types +971XXXXXXXXX
+    Login->>OTP: Sends OTP code to phone
+    Cap->>OTP: Enters the 6-digit code
+    OTP-->>Cap: Welcome back, Captain!
+    Cap->>MyTeam: Redirected to /my-team
+    MyTeam-->>Cap: Shows team dashboard
+    Cap->>Roster: Taps "Manage Roster"
+    Roster-->>Cap: Add/edit players
+    Cap->>Kit: Taps "Kit Sizes"
+    Kit-->>Cap: Submit sizes for each player
+      </pre>
+    </div>
+
+    <h3>🔧 Admin Journey — "I run everything!"</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+sequenceDiagram
+    actor Admin as 🔧 Admin
+    participant Login as 🔐 Login
+    participant Dash as 📊 Dashboard
+    participant Matches as ⚽ Match Manager
+    participant Score as 🥅 Live Scoring
+    participant Public as 🌐 Public Site
+
+    Admin->>Login: Logs in with admin phone
+    Login-->>Admin: Verified as ADMIN role
+    Admin->>Dash: Redirected to /admin
+    Dash-->>Admin: Stats overview, quick actions
+    Admin->>Matches: Clicks "Matches" in sidebar
+    Matches-->>Admin: List of all 31 matches
+    Admin->>Score: Opens a match, enters score
+    Score->>Public: Data saved, cache cleared
+    Public-->>Public: Fans see updated score instantly!
+      </pre>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4: AUTHENTICATION FLOW -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-4">
+    <div class="section-header">
+      <div class="section-number">04</div>
+      <span class="section-emoji">🔐</span>
+      <h2>Authentication Flow</h2>
+    </div>
+
+    <div class="analogy">Think of it like a <strong>concert wristband</strong>. You show your phone number at the gate (login). They text you a secret code (OTP). You tell them the code, and they give you a wristband (JWT token). That wristband lets you in, and different colored wristbands give access to different areas (roles).</div>
+
+    <p>We use <strong>phone-based OTP authentication</strong>. No passwords to remember! You just need your phone number. Here's exactly what happens step by step:</p>
+
+    <h3>🔑 The Complete Auth Flow</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    A["📱 User opens /login"] --> B["📝 Enters phone number"]
+    B --> C["📤 POST /api/auth/otp/start"]
+    C --> D{"Phone valid?"}
+    D -->|"No"| E["❌ Show error message"]
+    D -->|"Yes"| F["🔢 Generate 6-digit OTP"]
+    F --> G["💾 Store OTP in database\n(expires in 5 minutes)"]
+    G --> H["📲 Send OTP to phone\n(SMS or console in dev)"]
+    H --> I["📝 User enters 6-digit code"]
+    I --> J["📤 POST /api/auth/otp/verify"]
+    J --> K{"Code correct &\nnot expired?"}
+    K -->|"No"| L["❌ Wrong code, try again\n(max 5 attempts)"]
+    K -->|"Yes"| M["👤 Find or create User"]
+    M --> N["🎫 Sign JWT token\n(using jose library)"]
+    N --> O["🍪 Set HTTP-only cookie\n(token stored safely)"]
+    O --> P{"What is their role?"}
+    P -->|"FAN"| Q["🏠 Redirect to /"]
+    P -->|"CAPTAIN"| R["👥 Redirect to /my-team"]
+    P -->|"ADMIN"| S["🔧 Redirect to /admin"]
+
+    style A fill:#1a1a25,stroke:#E4002B,color:#fff
+    style F fill:#1a1a25,stroke:#22C55E,color:#fff
+    style N fill:#1a1a25,stroke:#FFD700,color:#fff
+    style Q fill:#1a1a25,stroke:#22C55E,color:#fff
+    style R fill:#1a1a25,stroke:#3B82F6,color:#fff
+    style S fill:#1a1a25,stroke:#E4002B,color:#fff
+      </pre>
+    </div>
+
+    <h3>🛡️ How JWT Protects Pages</h3>
+    <p>Once you're logged in, every time you visit a protected page, the <strong>middleware</strong> (a security guard at every door) checks your JWT cookie:</p>
+
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    A["🌐 Request to any page"] --> B["🛡️ Middleware runs"]
+    B --> C{"Has JWT cookie?"}
+    C -->|"No"| D{"Is page protected?"}
+    D -->|"No"| E["✅ Allow access\n(public page)"]
+    D -->|"Yes"| F["🔒 Redirect to /login"]
+    C -->|"Yes"| G["🔍 Verify JWT with jose"]
+    G --> H{"Token valid?"}
+    H -->|"No"| F
+    H -->|"Yes"| I{"Role authorized\nfor this page?"}
+    I -->|"No"| J["🚫 403 Forbidden"]
+    I -->|"Yes"| K["✅ Allow access"]
+      </pre>
+    </div>
+
+    <h3>🔑 Auth Endpoints</h3>
+    <table>
+      <tr><th>Endpoint</th><th>Method</th><th>What It Does</th></tr>
+      <tr><td><code>/api/auth/otp/start</code></td><td>POST</td><td>Takes phone number, creates OTP, sends it</td></tr>
+      <tr><td><code>/api/auth/otp/verify</code></td><td>POST</td><td>Checks OTP code, returns JWT if correct</td></tr>
+      <tr><td><code>/api/auth/me</code></td><td>GET</td><td>Returns current user info from JWT</td></tr>
+      <tr><td><code>/api/auth/logout</code></td><td>POST</td><td>Clears the JWT cookie, logs you out</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5: DATABASE SCHEMA -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-5">
+    <div class="section-header">
+      <div class="section-number">05</div>
+      <span class="section-emoji">🗄️</span>
+      <h2>Database Schema</h2>
+    </div>
+
+    <div class="analogy">The database is like a giant <strong>filing cabinet</strong>. Each drawer (table/model) holds a specific type of document. The "Teams" drawer has cards for each team. The "Matches" drawer has sheets for each game. Some documents have sticky notes pointing to other drawers — those are <strong>relationships</strong> (like "this match involves Team A and Team B").</div>
+
+    <p>We have <strong>27+ database models</strong> organized into logical groups. The database is PostgreSQL hosted on <strong>Neon</strong> (a serverless database), and we talk to it using <strong>Prisma ORM</strong> (which translates our JavaScript code into SQL).</p>
+
+    <h3>📊 Entity Relationship Diagram</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+erDiagram
+    Campaign ||--o{ EventDay : "has many"
+    EventDay ||--o{ Match : "has many"
+
+    Group ||--o{ Team : "contains"
+    Group ||--o{ Standing : "has"
+    Group ||--o{ Match : "belongs to"
+
+    Team ||--o{ Player : "has many"
+    Team ||--o{ Standing : "has"
+    Team ||--o{ FavoriteTeam : "favorited by"
+    Team }o--o| User : "captained by"
+
+    Match ||--o| Score : "has"
+    Match ||--o{ MatchEvent : "has events"
+    Match }o--o| Pitch : "played on"
+
+    Venue ||--o{ Pitch : "has"
+
+    Player ||--o| RosterMember : "roster entry"
+
+    User ||--o{ OtpCode : "has"
+    User ||--o{ Notification : "receives"
+    User ||--o{ NotificationPreference : "preferences"
+    User ||--o{ Application : "submits"
+    User ||--o{ FavoriteTeam : "favorites"
+    User ||--o| CaptainProfile : "profile"
+
+    Application ||--o{ ApplicationStatusLog : "status history"
+
+    Campaign {
+        string id PK
+        string slug UK
+        string title
+        string tagline
+        enum state
+        datetime startDate
+        datetime endDate
+    }
+
+    EventDay {
+        string id PK
+        string campaignId FK
+        int dayNumber
+        datetime date
+        string label
+    }
+
+    Team {
+        string id PK
+        string name
+        string shortName
+        string logoUrl
+        string groupId FK
+        string captainId FK
+        int seed
+    }
+
+    Player {
+        string id PK
+        string teamId FK
+        string name
+        string position
+        int number
+        boolean isCaptain
+    }
+
+    Match {
+        string id PK
+        string eventDayId FK
+        string groupId FK
+        string homeTeamId FK
+        string awayTeamId FK
+        int matchNumber
+        enum stage
+        enum status
+        datetime scheduledAt
+    }
+
+    Score {
+        string id PK
+        string matchId FK
+        int homeGoals
+        int awayGoals
+        int homePenalties
+        int awayPenalties
+    }
+
+    MatchEvent {
+        string id PK
+        string matchId FK
+        string type
+        int minute
+        string teamSide
+        string playerName
+    }
+
+    User {
+        string id PK
+        string phone UK
+        string name
+        string email
+        enum role
+        boolean isVerified
+    }
+
+    Group {
+        string id PK
+        string name
+        int order
+    }
+
+    Standing {
+        string id PK
+        string groupId FK
+        string teamId FK
+        int played
+        int won
+        int drawn
+        int lost
+        int points
+    }
+      </pre>
+    </div>
+
+    <h3>📁 Models Grouped by Domain</h3>
+
+    <h4>🏆 Campaign & Event (3 models)</h4>
+    <table>
+      <tr><th>Model</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>Campaign</code></td><td>The tournament itself</td><td>"Road to Greatness 2026"</td></tr>
+      <tr><td><code>EventDay</code></td><td>Each day of the tournament</td><td>"Day 1 — May 15, 2026"</td></tr>
+      <tr><td><code>Venue / Pitch</code></td><td>Where matches happen</td><td>"Pitch A at Dubai Sports City"</td></tr>
+    </table>
+
+    <h4>⚽ Teams & Players (3 models)</h4>
+    <table>
+      <tr><th>Model</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>Team</code></td><td>Team info, logo, captain</td><td>"Dubai Strikers"</td></tr>
+      <tr><td><code>Player</code></td><td>Player name, position, number</td><td>"Ahmed, #10, Forward"</td></tr>
+      <tr><td><code>RosterMember</code></td><td>Confirmed roster entries</td><td>Kit size, confirmed status</td></tr>
+    </table>
+
+    <h4>📊 Groups & Standings (2 models)</h4>
+    <table>
+      <tr><th>Model</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>Group</code></td><td>Tournament groups</td><td>"Group A"</td></tr>
+      <tr><td><code>Standing</code></td><td>Points, wins, goals for each team</td><td>"Team X: 6pts, 2W 0D 0L"</td></tr>
+    </table>
+
+    <h4>🥅 Matches & Scoring (4 models)</h4>
+    <table>
+      <tr><th>Model</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>Match</code></td><td>Two teams, time, status</td><td>"Match #1: Team A vs Team B"</td></tr>
+      <tr><td><code>Score</code></td><td>Goals for each team</td><td>"2 - 1"</td></tr>
+      <tr><td><code>MatchEvent</code></td><td>Goals, cards, subs</td><td>"⚽ GOAL 23' Ahmed"</td></tr>
+      <tr><td><code>BracketNode</code></td><td>Knockout bracket slots</td><td>"Semi-final 1: Winner G1 vs Runner G2"</td></tr>
+    </table>
+
+    <h4>👤 Auth & Users (4 models)</h4>
+    <table>
+      <tr><th>Model</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>User</code></td><td>Phone, name, role</td><td>"+971500000000, ADMIN"</td></tr>
+      <tr><td><code>OtpCode</code></td><td>Temporary login codes</td><td>"123456, expires in 5 min"</td></tr>
+      <tr><td><code>CaptainProfile</code></td><td>Extra captain details</td><td>"Full name, email, area"</td></tr>
+      <tr><td><code>AgreementStatus</code></td><td>Signed agreements</td><td>"Terms accepted on 2026-03-01"</td></tr>
+    </table>
+
+    <h4>📋 Applications (2 models)</h4>
+    <table>
+      <tr><th>Model</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>Application</code></td><td>Team applications to join</td><td>"Team X applied, status: SUBMITTED"</td></tr>
+      <tr><td><code>ApplicationStatusLog</code></td><td>History of status changes</td><td>"SUBMITTED → UNDER_REVIEW"</td></tr>
+    </table>
+
+    <h4>🔔 Notifications (3 models)</h4>
+    <table>
+      <tr><th>Model</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>Notification</code></td><td>Messages sent to users</td><td>"Your match starts in 1 hour!"</td></tr>
+      <tr><td><code>NotificationTemplate</code></td><td>Reusable message templates</td><td>"match_reminder" template</td></tr>
+      <tr><td><code>NotificationPreference</code></td><td>User opt-in/out settings</td><td>"Match updates: ON"</td></tr>
+    </table>
+
+    <h4>📰 Content CMS (5 models)</h4>
+    <table>
+      <tr><th>Model</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>HeroSlide</code></td><td>Homepage carousel slides</td><td>Background image, title, CTA</td></tr>
+      <tr><td><code>SiteContent</code></td><td>Key-value text snippets</td><td>"prize_title: Win Big!"</td></tr>
+      <tr><td><code>FaqItem</code></td><td>Questions and answers</td><td>"How do I register?"</td></tr>
+      <tr><td><code>PrizePackage</code></td><td>Prizes to display</td><td>"Grand Prize: Trip to London"</td></tr>
+      <tr><td><code>Highlight</code></td><td>Video/photo highlights</td><td>"Best goals of Day 1"</td></tr>
+    </table>
+
+    <h4>🎯 Other (3 models)</h4>
+    <table>
+      <tr><th>Model</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>ZoneSchedule</code></td><td>Fan zone activities</td><td>"Face painting 2pm-4pm"</td></tr>
+      <tr><td><code>FavoriteTeam</code></td><td>User's favorite team picks</td><td>"User X favorites Team Y"</td></tr>
+      <tr><td><code>KitSizeSubmission</code></td><td>Bulk kit size forms</td><td>JSON blob with all sizes</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6: PAGE MAP / SITEMAP -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-6">
+    <div class="section-header">
+      <div class="section-number">06</div>
+      <span class="section-emoji">🗺️</span>
+      <h2>Page Map / Sitemap</h2>
+    </div>
+
+    <div class="analogy">Think of the app like a <strong>building with floors</strong>. The ground floor is open to everyone (public pages). The second floor is for captains only (captain pages). The top floor is the admin office (admin pages). You need the right keycard (role) to get to each floor!</div>
+
+    <h3>🏠 Public Pages (anyone can see)</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    HOME["🏠 /\nHome Page"] --> MATCHES["⚽ /matches\nAll Matches"]
+    MATCHES --> MATCH_DETAIL["📋 /matches/[id]\nMatch Detail"]
+    HOME --> STANDINGS["📊 /standings\nGroup Tables"]
+    HOME --> TEAMS["🏟️ /teams\nAll Teams"]
+    TEAMS --> TEAM_DETAIL["👥 /teams/[id]\nTeam Detail"]
+    HOME --> FAQ["❓ /faq\nFAQ"]
+    HOME --> HIGHLIGHTS["🎬 /highlights\nHighlights"]
+    HOME --> PRIZE["🏆 /prize\nPrize Info"]
+    HOME --> ZONE["🎪 /zone\nFan Zone"]
+    HOME --> NOTIF["🔔 /notifications\nNotifications"]
+    HOME --> FANINT["🙋 /fan-interest\nFan Interest"]
+    HOME --> REG["📝 /register\nRegistration"]
+
+    style HOME fill:#E4002B,stroke:#E4002B,color:#fff
+      </pre>
+    </div>
+
+    <h3>🔐 Auth Pages</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    LOGIN["🔐 /login\nPhone + OTP"]
+      </pre>
+    </div>
+
+    <h3>🧑‍✈️ Captain Pages (captains only)</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    MYTEAM["👥 /my-team\nTeam Dashboard"] --> ROSTER["📋 /my-team/roster\nManage Roster"]
+    MYTEAM --> KIT["👕 /my-team/kit-sizes\nKit Sizes"]
+    MYTEAM --> AGREE["📜 /my-team/agreements\nAgreements"]
+    APPLY["📝 /apply\nApply as Captain"]
+    STATUS["📊 /status\nApplication Status"]
+
+    style MYTEAM fill:#3B82F6,stroke:#3B82F6,color:#fff
+      </pre>
+    </div>
+
+    <h3>🔧 Admin Pages (admins only)</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    DASH["📊 /admin\nDashboard"] --> CAMP["🏆 /admin/campaign\nCampaign Settings"]
+    DASH --> A_MATCHES["⚽ /admin/matches\nMatch Manager"]
+    A_MATCHES --> A_MATCH_D["📋 /admin/matches/[id]\nMatch Detail & Scoring"]
+    DASH --> A_TEAMS["🏟️ /admin/teams\nTeam Manager"]
+    A_TEAMS --> A_TEAM_D["👥 /admin/teams/[id]\nTeam Detail & Players"]
+    DASH --> A_STAND["📊 /admin/standings\nStandings Manager"]
+    DASH --> A_HERO["🖼️ /admin/hero-slides\nHero Carousel"]
+    DASH --> A_CONTENT["📝 /admin/content\nSite Content CMS"]
+    DASH --> A_FAQ["❓ /admin/faq\nFAQ Manager"]
+    DASH --> A_HIGH["🎬 /admin/highlights\nHighlights Manager"]
+    DASH --> A_PRIZE["🏆 /admin/prizes\nPrize Manager"]
+    DASH --> A_ZONE["🎪 /admin/zone\nZone Schedule"]
+    DASH --> A_NOTIF["🔔 /admin/notifications\nNotification Sender"]
+    DASH --> A_APPS["📋 /admin/applications\nApplications Review"]
+    DASH --> A_USERS["👤 /admin/users\nUser Management"]
+
+    style DASH fill:#E4002B,stroke:#E4002B,color:#fff
+      </pre>
+    </div>
+
+    <h3>📊 Page Count Summary</h3>
+    <table>
+      <tr><th>Area</th><th>Count</th><th>Pages</th></tr>
+      <tr><td>🏠 Public</td><td>12</td><td>Home, Matches, Match Detail, Standings, Teams, Team Detail, FAQ, Highlights, Prize, Zone, Notifications, Fan Interest, Register</td></tr>
+      <tr><td>🔐 Auth</td><td>1</td><td>Login</td></tr>
+      <tr><td>🧑‍✈️ Captain</td><td>5</td><td>My Team, Roster, Kit Sizes, Agreements, Apply, Status</td></tr>
+      <tr><td>🔧 Admin</td><td>15</td><td>Dashboard + 14 management pages</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>33</strong></td><td></td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7: API ROUTE MAP -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-7">
+    <div class="section-header">
+      <div class="section-number">07</div>
+      <span class="section-emoji">🚪</span>
+      <h2>API Route Map</h2>
+    </div>
+
+    <div class="analogy">APIs are like <strong>waiters at a restaurant</strong>. You (the app page) don't go into the kitchen (database) yourself. Instead, you tell the waiter (API) what you want, the waiter goes to the kitchen, and brings your food back. Different waiters handle different tables!</div>
+
+    <p>We have <strong>46 API routes</strong> organized into three groups: Public (anyone can use), Auth (for logging in), and Admin (only admins can use).</p>
+
+    <h3>🌐 Public API Routes (10 routes)</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    subgraph Public["🌐 Public APIs — No login needed"]
+        P1["GET /api/campaign"]
+        P2["GET /api/matches"]
+        P3["GET /api/matches/[matchId]"]
+        P4["GET /api/teams"]
+        P5["GET /api/teams/[teamId]"]
+        P6["GET /api/standings"]
+        P7["GET /api/highlights"]
+        P8["GET /api/faq"]
+        P9["GET /api/prize"]
+        P10["GET /api/zone"]
+        P11["GET /api/bracket"]
+        P12["GET /api/notifications"]
+    end
+      </pre>
+    </div>
+
+    <h3>🔐 Auth API Routes (4 routes)</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    subgraph Auth["🔐 Auth APIs"]
+        A1["POST /api/auth/otp/start\n→ Send OTP"]
+        A2["POST /api/auth/otp/verify\n→ Verify & get JWT"]
+        A3["GET /api/auth/me\n→ Who am I?"]
+        A4["POST /api/auth/logout\n→ Clear cookie"]
+    end
+      </pre>
+    </div>
+
+    <h3>🔧 Admin API Routes (30 routes)</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    subgraph AdminAPI["🔧 Admin APIs — ADMIN role required"]
+        direction TB
+        STATS["GET /api/admin/stats"]
+
+        subgraph MatchAPIs["⚽ Match APIs"]
+            M1["GET/POST /api/admin/matches"]
+            M2["GET/PATCH /api/admin/matches/[id]"]
+            M3["GET/POST /api/admin/matches/[id]/events"]
+        end
+
+        subgraph TeamAPIs["🏟️ Team APIs"]
+            T1["GET/POST /api/admin/teams"]
+            T2["GET/PATCH /api/admin/teams/[id]"]
+            T3["GET/POST /api/admin/teams/[id]/players"]
+            T4["PATCH/DELETE /api/admin/teams/[id]/players/[pid]"]
+        end
+
+        subgraph ContentAPIs["📝 Content APIs"]
+            C1["GET/POST /api/admin/hero-slides"]
+            C2["PATCH/DELETE /api/admin/hero-slides/[id]"]
+            C3["POST /api/admin/hero-slides/reorder"]
+            C4["GET/POST /api/admin/content"]
+            C5["GET/POST /api/admin/faq"]
+            C6["PATCH/DELETE /api/admin/faq/[id]"]
+            C7["POST /api/admin/faq/reorder"]
+        end
+
+        subgraph OtherAPIs["📦 Other Admin APIs"]
+            O1["GET/PATCH /api/admin/campaign"]
+            O2["GET/POST /api/admin/standings"]
+            O3["POST /api/admin/standings/recalculate"]
+            O4["GET/POST /api/admin/highlights"]
+            O5["PATCH/DELETE /api/admin/highlights/[id]"]
+            O6["GET/POST /api/admin/prizes"]
+            O7["PATCH/DELETE /api/admin/prizes/[id]"]
+            O8["GET/POST /api/admin/zone"]
+            O9["PATCH/DELETE /api/admin/zone/[id]"]
+            O10["GET/POST /api/admin/notifications/send"]
+            O11["GET /api/admin/notifications/templates"]
+            O12["GET /api/admin/applications"]
+            O13["PATCH /api/admin/applications/[id]"]
+            O14["GET /api/admin/users"]
+            O15["PATCH /api/admin/users/[id]"]
+        end
+    end
+      </pre>
+    </div>
+
+    <h3>📋 Full Route Reference Table</h3>
+    <table>
+      <tr><th>#</th><th>Method(s)</th><th>Route</th><th>Auth</th><th>Description</th></tr>
+      <tr><td>1</td><td>GET</td><td><code>/api/campaign</code></td><td>Public</td><td>Get campaign info</td></tr>
+      <tr><td>2</td><td>GET</td><td><code>/api/matches</code></td><td>Public</td><td>List all matches</td></tr>
+      <tr><td>3</td><td>GET</td><td><code>/api/matches/[matchId]</code></td><td>Public</td><td>Single match detail</td></tr>
+      <tr><td>4</td><td>GET</td><td><code>/api/teams</code></td><td>Public</td><td>List all teams</td></tr>
+      <tr><td>5</td><td>GET</td><td><code>/api/teams/[teamId]</code></td><td>Public</td><td>Single team detail</td></tr>
+      <tr><td>6</td><td>GET</td><td><code>/api/standings</code></td><td>Public</td><td>Group standings</td></tr>
+      <tr><td>7</td><td>GET</td><td><code>/api/highlights</code></td><td>Public</td><td>All highlights</td></tr>
+      <tr><td>8</td><td>GET</td><td><code>/api/faq</code></td><td>Public</td><td>FAQ items</td></tr>
+      <tr><td>9</td><td>GET</td><td><code>/api/prize</code></td><td>Public</td><td>Prize packages</td></tr>
+      <tr><td>10</td><td>GET</td><td><code>/api/zone</code></td><td>Public</td><td>Zone schedule</td></tr>
+      <tr><td>11</td><td>GET</td><td><code>/api/bracket</code></td><td>Public</td><td>Knockout bracket</td></tr>
+      <tr><td>12</td><td>GET</td><td><code>/api/notifications</code></td><td>Public</td><td>Notifications list</td></tr>
+      <tr><td>13</td><td>POST</td><td><code>/api/auth/otp/start</code></td><td>—</td><td>Start OTP flow</td></tr>
+      <tr><td>14</td><td>POST</td><td><code>/api/auth/otp/verify</code></td><td>—</td><td>Verify OTP code</td></tr>
+      <tr><td>15</td><td>GET</td><td><code>/api/auth/me</code></td><td>Auth</td><td>Get current user</td></tr>
+      <tr><td>16</td><td>POST</td><td><code>/api/auth/logout</code></td><td>Auth</td><td>Log out</td></tr>
+      <tr><td>17</td><td>GET</td><td><code>/api/admin/stats</code></td><td>Admin</td><td>Dashboard stats</td></tr>
+      <tr><td>18-19</td><td>GET/POST</td><td><code>/api/admin/matches</code></td><td>Admin</td><td>List/create matches</td></tr>
+      <tr><td>20-21</td><td>GET/PATCH</td><td><code>/api/admin/matches/[id]</code></td><td>Admin</td><td>View/update match</td></tr>
+      <tr><td>22-23</td><td>GET/POST</td><td><code>/api/admin/matches/[id]/events</code></td><td>Admin</td><td>Match events (goals, cards)</td></tr>
+      <tr><td>24-25</td><td>GET/POST</td><td><code>/api/admin/teams</code></td><td>Admin</td><td>List/create teams</td></tr>
+      <tr><td>26-27</td><td>GET/PATCH</td><td><code>/api/admin/teams/[id]</code></td><td>Admin</td><td>View/update team</td></tr>
+      <tr><td>28-29</td><td>GET/POST</td><td><code>/api/admin/teams/[id]/players</code></td><td>Admin</td><td>Team players</td></tr>
+      <tr><td>30-31</td><td>PATCH/DEL</td><td><code>/api/admin/teams/[id]/players/[pid]</code></td><td>Admin</td><td>Update/delete player</td></tr>
+      <tr><td>32-33</td><td>GET/POST</td><td><code>/api/admin/hero-slides</code></td><td>Admin</td><td>Hero carousel</td></tr>
+      <tr><td>34-35</td><td>PATCH/DEL</td><td><code>/api/admin/hero-slides/[id]</code></td><td>Admin</td><td>Update/delete slide</td></tr>
+      <tr><td>36</td><td>POST</td><td><code>/api/admin/hero-slides/reorder</code></td><td>Admin</td><td>Reorder slides</td></tr>
+      <tr><td>37</td><td>GET/POST</td><td><code>/api/admin/content</code></td><td>Admin</td><td>CMS key-value content</td></tr>
+      <tr><td>38-39</td><td>GET/POST</td><td><code>/api/admin/faq</code></td><td>Admin</td><td>FAQ items</td></tr>
+      <tr><td>40-41</td><td>PATCH/DEL</td><td><code>/api/admin/faq/[id]</code></td><td>Admin</td><td>Update/delete FAQ</td></tr>
+      <tr><td>42</td><td>POST</td><td><code>/api/admin/faq/reorder</code></td><td>Admin</td><td>Reorder FAQs</td></tr>
+      <tr><td>43</td><td>GET/PATCH</td><td><code>/api/admin/campaign</code></td><td>Admin</td><td>Campaign settings</td></tr>
+      <tr><td>44</td><td>GET/POST</td><td><code>/api/admin/standings</code></td><td>Admin</td><td>Standings data</td></tr>
+      <tr><td>45</td><td>POST</td><td><code>/api/admin/standings/recalculate</code></td><td>Admin</td><td>Recalculate all standings</td></tr>
+      <tr><td>46</td><td>GET/POST</td><td><code>/api/admin/notifications/send</code></td><td>Admin</td><td>Send notifications</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 8: MATCH DAY WORKFLOW -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-8">
+    <div class="section-header">
+      <div class="section-number">08</div>
+      <span class="section-emoji">📅</span>
+      <h2>Match Day Workflow</h2>
+    </div>
+
+    <div class="analogy">Running a match day is like being a <strong>movie director on set</strong>. Before shooting, you check all the equipment (pre-match). During filming, you call the shots (live scoring). After filming, you review the footage and share it with the world (post-match highlights).</div>
+
+    <h3>🌅 The Full Match Day Timeline</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    subgraph Morning["🌅 Morning Setup"]
+        A1["☀️ Admin opens /admin dashboard"]
+        A2["📋 Review today's match schedule"]
+        A3["✅ Verify teams, players, pitches assigned"]
+        A4["📢 Send 'Match Day!' notification to fans"]
+        A1 --> A2 --> A3 --> A4
+    end
+
+    subgraph PreMatch["⏰ Pre-Match (30 min before)"]
+        B1["🔍 Open /admin/matches/[id]"]
+        B2["✅ Confirm both teams are ready"]
+        B3["📊 Check roster & kit sizes submitted"]
+        B4["🔄 Status stays: SCHEDULED"]
+        B1 --> B2 --> B3 --> B4
+    end
+
+    subgraph Live["⚽ During Match (LIVE)"]
+        C1["▶️ Change status: LIVE_FIRST_HALF"]
+        C2["⚽ Add goals as they happen"]
+        C3["🟨 Add yellow/red cards"]
+        C4["⏸️ Change status: HALF_TIME"]
+        C5["▶️ Change status: LIVE_SECOND_HALF"]
+        C6["⚽ Continue adding events"]
+        C7["🏁 Change status: FULL_TIME"]
+        C1 --> C2 --> C3 --> C4 --> C5 --> C6 --> C7
+    end
+
+    subgraph PostMatch["📊 Post-Match"]
+        D1["✅ Verify final score is correct"]
+        D2["📊 Click 'Recalculate Standings'"]
+        D3["🏆 Standings update automatically"]
+        D4["✅ Change status: COMPLETED"]
+        D1 --> D2 --> D3 --> D4
+    end
+
+    subgraph EndOfDay["🌙 End of Day"]
+        E1["🎬 Upload highlight videos"]
+        E2["📸 Upload photos to Cloudinary"]
+        E3["📢 Send results notification"]
+        E4["📊 Review final standings"]
+        E1 --> E2 --> E3 --> E4
+    end
+
+    Morning --> PreMatch --> Live --> PostMatch --> EndOfDay
+
+    style Morning fill:#12121a,stroke:#FFD700,color:#fff
+    style PreMatch fill:#12121a,stroke:#3B82F6,color:#fff
+    style Live fill:#12121a,stroke:#E4002B,color:#fff
+    style PostMatch fill:#12121a,stroke:#22C55E,color:#fff
+    style EndOfDay fill:#12121a,stroke:#A855F7,color:#fff
+      </pre>
+    </div>
+
+    <h3>⚡ Live Scoring Cheat Sheet</h3>
+    <div class="info-box">
+      <h4>Step-by-step for admins during a live match:</h4>
+      <ol>
+        <li>Go to <code>/admin/matches/[matchId]</code></li>
+        <li>Click <strong>"Start First Half"</strong> — status changes to LIVE_FIRST_HALF</li>
+        <li>When a goal happens: click <strong>"Add Event"</strong> → type: GOAL, minute, player name, team side</li>
+        <li>Score updates automatically on the public site</li>
+        <li>At halftime: click <strong>"Half Time"</strong></li>
+        <li>Start second half: click <strong>"Start Second Half"</strong></li>
+        <li>After final whistle: click <strong>"Full Time"</strong></li>
+        <li>Review everything, then click <strong>"Complete Match"</strong></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 9: DATA FLOW -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-9">
+    <div class="section-header">
+      <div class="section-number">09</div>
+      <span class="section-emoji">🔄</span>
+      <h2>Data Flow</h2>
+    </div>
+
+    <div class="analogy">Data flow is like a <strong>newspaper printing press</strong>. The journalist (admin) writes the story. The editor (Zod) checks for errors. The printing press (Prisma) puts it on paper (database). The delivery truck (cache busting) rushes it to the newsstand (public site). The reader (fan) picks up the fresh paper (TanStack Query loads the data).</div>
+
+    <h3>✏️ Admin Edit → Fan Sees Updated Content</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    A["🔧 Admin edits content\nin /admin panel"] --> B["📤 Browser sends POST/PATCH\nto /api/admin/*"]
+    B --> C["🛡️ Middleware checks\nJWT + ADMIN role"]
+    C --> D["✅ Zod validates\nrequest body"]
+    D --> E["🔮 Prisma ORM\nwrites to database"]
+    E --> F["🐘 Neon PostgreSQL\nstores data permanently"]
+    F --> G["🔄 revalidatePath()\nbusts Next.js cache"]
+    G --> H["📱 Fan visits public page"]
+    H --> I["🌐 Page fetches\nGET /api/*"]
+    I --> J["🔮 Prisma reads\nfresh data"]
+    J --> K["📦 TanStack Query\ncaches in browser"]
+    K --> L["👀 Fan sees\nupdated content!"]
+
+    style A fill:#1a1a25,stroke:#E4002B,color:#fff
+    style D fill:#1a1a25,stroke:#FFD700,color:#fff
+    style F fill:#1a1a25,stroke:#22C55E,color:#fff
+    style G fill:#1a1a25,stroke:#F97316,color:#fff
+    style L fill:#1a1a25,stroke:#22C55E,color:#fff
+      </pre>
+    </div>
+
+    <h3>🖼️ Image Upload Flow</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart LR
+    A["📸 Admin selects\nan image file"] --> B["☁️ Upload directly\nto Cloudinary"]
+    B --> C["🔗 Cloudinary returns\nimage URL"]
+    C --> D["💾 URL saved in\ndatabase via Prisma"]
+    D --> E["📱 Public page loads\nimage from Cloudinary CDN"]
+
+    style B fill:#1a1a25,stroke:#F97316,color:#fff
+    style E fill:#1a1a25,stroke:#22C55E,color:#fff
+      </pre>
+    </div>
+
+    <h3>📊 Standings Recalculation Flow</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    A["🔧 Admin clicks\n'Recalculate Standings'"] --> B["📤 POST /api/admin/\nstandings/recalculate"]
+    B --> C["🔮 Prisma fetches\nall COMPLETED matches"]
+    C --> D["🧮 Calculate W/D/L,\ngoals, points for each team"]
+    D --> E["📊 Sort teams by\npoints, GD, GF"]
+    E --> F["💾 Write updated\nstandings to DB"]
+    F --> G["🔄 Cache busted"]
+    G --> H["📊 /standings page\nshows fresh tables!"]
+      </pre>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 10: DEPLOYMENT PIPELINE -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-10">
+    <div class="section-header">
+      <div class="section-number">10</div>
+      <span class="section-emoji">🚀</span>
+      <h2>Deployment Pipeline</h2>
+    </div>
+
+    <div class="analogy">Deploying is like <strong>baking a cake and putting it in the display case</strong>. You write the recipe (code), put it in the oven (Vercel build), and when it's done, it goes straight into the bakery window (live website) for everyone to enjoy!</div>
+
+    <p>We use <strong>Vercel</strong> for hosting. Every time code is pushed to GitHub, Vercel automatically builds and deploys the new version. Zero downtime!</p>
+
+    <h3>🏭 The Deployment Flow</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    A["💻 Developer writes code\nlocally"] --> B["📤 git push to GitHub"]
+    B --> C["🔔 Vercel detects\nnew commit"]
+    C --> D["📦 Install dependencies\nnpm install"]
+    D --> E["🔮 prisma generate\n(create DB client)"]
+    E --> F["🏗️ next build\n(compile everything)"]
+    F --> G{"Build\nsuccessful?"}
+    G -->|"❌ No"| H["🚨 Build fails\nDev gets notified"]
+    G -->|"✅ Yes"| I["☁️ Deploy to\nVercel Serverless"]
+    I --> J["🌐 New version live!\ntcl-app.vercel.app"]
+
+    subgraph Connected["🔗 Connected Services"]
+        K["🐘 Neon PostgreSQL\n(Database)"]
+        L["☁️ Cloudinary\n(Images/Videos)"]
+    end
+
+    J --> K
+    J --> L
+
+    style A fill:#1a1a25,stroke:#A855F7,color:#fff
+    style F fill:#1a1a25,stroke:#FFD700,color:#fff
+    style J fill:#1a1a25,stroke:#22C55E,color:#fff
+      </pre>
+    </div>
+
+    <h3>⚙️ Build Steps Explained</h3>
+    <table>
+      <tr><th>Step</th><th>Command</th><th>What It Does</th><th>Time</th></tr>
+      <tr><td>1</td><td><code>npm install</code></td><td>Downloads all the ingredients (libraries)</td><td>~30s</td></tr>
+      <tr><td>2</td><td><code>prisma generate</code></td><td>Creates the database translator (Prisma Client)</td><td>~5s</td></tr>
+      <tr><td>3</td><td><code>next build</code></td><td>Compiles React pages, optimizes everything</td><td>~60s</td></tr>
+      <tr><td>4</td><td>Deploy</td><td>Uploads to Vercel's global network</td><td>~15s</td></tr>
+    </table>
+
+    <div class="info-box success">
+      <strong>💡 Preview Deployments:</strong> Every pull request on GitHub gets its own unique preview URL so you can test changes before they go live!
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 11: USER ROLES -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-11">
+    <div class="section-header">
+      <div class="section-number">11</div>
+      <span class="section-emoji">👑</span>
+      <h2>User Roles & Permissions</h2>
+    </div>
+
+    <div class="analogy">User roles are like <strong>VIP levels at a theme park</strong>. A regular ticket (FAN) gets you on the rides. A team leader badge (CAPTAIN) lets you into the backstage area. A staff badge (ADMIN) gets you into the control room. And the park owner (SUPER_ADMIN) can do absolutely anything!</div>
+
+    <h3>🏆 Role Hierarchy</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+flowchart TD
+    SA["👑 SUPER_ADMIN\nGod mode — can do everything\nincluding managing other admins"]
+    SA --> AD["🔧 ADMIN\nFull control of tournament\ncontent, matches, teams"]
+    AD --> CA["🧑‍✈️ CAPTAIN\nManage own team\nroster, kit sizes"]
+    CA --> FN["👤 FAN\nView public content\nbrowse matches, standings"]
+
+    style SA fill:#1a1a25,stroke:#FFD700,color:#FFD700
+    style AD fill:#1a1a25,stroke:#E4002B,color:#E4002B
+    style CA fill:#1a1a25,stroke:#3B82F6,color:#3B82F6
+    style FN fill:#1a1a25,stroke:#22C55E,color:#22C55E
+      </pre>
+    </div>
+
+    <h3>📋 Detailed Permissions</h3>
+
+    <div class="role-card super">
+      <div class="role-name">👑 SUPER_ADMIN</div>
+      <p>The boss of bosses. Can do everything an ADMIN can, <strong>plus</strong> manage other users' roles (promote someone to ADMIN, demote them, etc.). Think of this as the tournament director.</p>
+      <ul>
+        <li>✅ Everything ADMIN can do</li>
+        <li>✅ Change user roles (promote/demote)</li>
+        <li>✅ Delete users</li>
+        <li>✅ Access system settings</li>
+      </ul>
+    </div>
+
+    <div class="role-card admin">
+      <div class="role-name">🔧 ADMIN</div>
+      <p>The tournament operator. Manages everything related to running the event — matches, teams, content, notifications. Think of this as the event manager.</p>
+      <ul>
+        <li>✅ Full admin portal access (/admin/*)</li>
+        <li>✅ Create/edit/delete matches, teams, players</li>
+        <li>✅ Live match scoring</li>
+        <li>✅ Manage all CMS content (hero slides, FAQ, highlights, prizes)</li>
+        <li>✅ Send notifications to all users</li>
+        <li>✅ Review applications</li>
+        <li>✅ Recalculate standings</li>
+        <li>✅ Upload media to Cloudinary</li>
+      </ul>
+    </div>
+
+    <div class="role-card captain">
+      <div class="role-name">🧑‍✈️ CAPTAIN</div>
+      <p>The team leader. Can manage their own team's roster, submit kit sizes, and sign agreements. Think of this as the football team's captain.</p>
+      <ul>
+        <li>✅ View /my-team dashboard</li>
+        <li>✅ Add/edit players on their roster</li>
+        <li>✅ Submit kit sizes for players</li>
+        <li>✅ Sign agreements & waivers</li>
+        <li>✅ All FAN permissions</li>
+        <li>❌ Cannot access /admin</li>
+        <li>❌ Cannot manage other teams</li>
+      </ul>
+    </div>
+
+    <div class="role-card fan">
+      <div class="role-name">👤 FAN</div>
+      <p>The spectator. Can browse all public content — matches, standings, teams, highlights, and more. Think of this as the person in the stands watching the game.</p>
+      <ul>
+        <li>✅ View all public pages</li>
+        <li>✅ Browse matches, standings, teams</li>
+        <li>✅ Watch highlights</li>
+        <li>✅ Read FAQ, prize info, zone schedule</li>
+        <li>✅ Receive notifications</li>
+        <li>✅ Favorite teams</li>
+        <li>❌ Cannot access /admin or /my-team</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 12: CAMPAIGN STATE MACHINE -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-12">
+    <div class="section-header">
+      <div class="section-number">12</div>
+      <span class="section-emoji">🔄</span>
+      <h2>Campaign State Machine</h2>
+    </div>
+
+    <div class="analogy">The campaign state is like the <strong>stages of planning a birthday party</strong>. First you plan it (PRE_LAUNCH). Then you send invitations (LAUNCH). Then you pick who's coming (SCREENING). Then the party happens (LIVE). And afterwards, you share photos and clean up (POST_EVENT).</div>
+
+    <p>The <strong>Campaign</strong> model has a <code>state</code> field that controls what the entire app shows. Each state enables different features:</p>
+
+    <h3>🔄 State Transitions</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> PRE_LAUNCH: Campaign created
+    PRE_LAUNCH --> LAUNCH: Open registrations
+    LAUNCH --> SCREENING: Close registrations
+    SCREENING --> LIVE: Tournament starts!
+    LIVE --> POST_EVENT: Tournament ends
+    POST_EVENT --> [*]: Archive
+
+    PRE_LAUNCH: 🔒 PRE_LAUNCH
+    PRE_LAUNCH: Coming soon page
+    PRE_LAUNCH: Registration closed
+
+    LAUNCH: 🚀 LAUNCH
+    LAUNCH: Registration open
+    LAUNCH: Fan interest forms active
+    LAUNCH: Captain applications open
+
+    SCREENING: 🔍 SCREENING
+    SCREENING: Registration closed
+    SCREENING: Teams being selected
+    SCREENING: Applications reviewed
+
+    LIVE: ⚽ LIVE
+    LIVE: Matches happening!
+    LIVE: Live scores active
+    LIVE: Standings updating
+
+    POST_EVENT: 🏆 POST_EVENT
+    POST_EVENT: Results final
+    POST_EVENT: Highlights shared
+    POST_EVENT: Prize winners announced
+      </pre>
+    </div>
+
+    <h3>📋 What Each State Enables</h3>
+    <table>
+      <tr><th>State</th><th>Public Site Shows</th><th>Admin Can Do</th></tr>
+      <tr><td>🔒 PRE_LAUNCH</td><td>Coming soon / countdown page</td><td>Set up teams, groups, schedule</td></tr>
+      <tr><td>🚀 LAUNCH</td><td>Registration forms, fan interest page</td><td>Review incoming applications</td></tr>
+      <tr><td>🔍 SCREENING</td><td>"Applications closed" message</td><td>Shortlist teams, confirm captains</td></tr>
+      <tr><td>⚽ LIVE</td><td>Full app: matches, scores, standings</td><td>Live scoring, event management</td></tr>
+      <tr><td>🏆 POST_EVENT</td><td>Final results, highlights gallery</td><td>Upload highlights, announce prizes</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 13: MATCH STATUS STATE MACHINE -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-13">
+    <div class="section-header">
+      <div class="section-number">13</div>
+      <span class="section-emoji">⚽</span>
+      <h2>Match Status State Machine</h2>
+    </div>
+
+    <div class="analogy">Match status is like a <strong>traffic light with extra colors</strong>. Red means stopped (SCHEDULED). Green means go (LIVE). Yellow means pause (HALF_TIME). A checkered flag means done (COMPLETED). And there's a special "detour" sign for when things go wrong (POSTPONED/CANCELLED).</div>
+
+    <h3>🔄 Normal Match Flow</h3>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+stateDiagram-v2
+    [*] --> SCHEDULED
+    SCHEDULED --> LIVE_FIRST_HALF: Kickoff!
+    LIVE_FIRST_HALF --> HALF_TIME: Half-time whistle
+    HALF_TIME --> LIVE_SECOND_HALF: Second half starts
+    LIVE_SECOND_HALF --> FULL_TIME: Final whistle
+    FULL_TIME --> PENALTIES: Knockout match tied
+    FULL_TIME --> COMPLETED: Verify results
+    PENALTIES --> COMPLETED: Penalties done
+
+    SCHEDULED --> POSTPONED: Weather/issues
+    SCHEDULED --> CANCELLED: Match cancelled
+    POSTPONED --> SCHEDULED: Rescheduled
+
+    SCHEDULED: ⏰ SCHEDULED
+    SCHEDULED: Waiting for kickoff
+    SCHEDULED: Teams assigned
+
+    LIVE_FIRST_HALF: ⚽ LIVE_FIRST_HALF
+    LIVE_FIRST_HALF: First 25 minutes
+    LIVE_FIRST_HALF: Goals being scored
+
+    HALF_TIME: ⏸️ HALF_TIME
+    HALF_TIME: 5-minute break
+    HALF_TIME: Teams resting
+
+    LIVE_SECOND_HALF: ⚽ LIVE_SECOND_HALF
+    LIVE_SECOND_HALF: Final 25 minutes
+    LIVE_SECOND_HALF: Score can change
+
+    FULL_TIME: 🏁 FULL_TIME
+    FULL_TIME: Match over
+    FULL_TIME: Admin reviews score
+
+    PENALTIES: 🥅 PENALTIES
+    PENALTIES: Penalty shootout
+    PENALTIES: Knockout stages only
+
+    COMPLETED: ✅ COMPLETED
+    COMPLETED: Official result
+    COMPLETED: Standings updated
+
+    POSTPONED: ⏳ POSTPONED
+    POSTPONED: Delayed to later date
+
+    CANCELLED: ❌ CANCELLED
+    CANCELLED: Match will not happen
+      </pre>
+    </div>
+
+    <h3>📋 Match Stage Types</h3>
+    <table>
+      <tr><th>Stage</th><th>What It Means</th><th>Penalties?</th></tr>
+      <tr><td><code>GROUP</code></td><td>Group stage match (can end in a draw)</td><td>❌ No</td></tr>
+      <tr><td><code>QUARTER_FINAL</code></td><td>Knockout round — must have a winner</td><td>✅ If tied</td></tr>
+      <tr><td><code>SEMI_FINAL</code></td><td>Knockout round — must have a winner</td><td>✅ If tied</td></tr>
+      <tr><td><code>THIRD_PLACE</code></td><td>3rd place playoff</td><td>✅ If tied</td></tr>
+      <tr><td><code>FINAL</code></td><td>The championship match!</td><td>✅ If tied</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 14: WIREFRAMES -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-14">
+    <div class="section-header">
+      <div class="section-number">14</div>
+      <span class="section-emoji">🎨</span>
+      <h2>Wireframes</h2>
+    </div>
+
+    <p>These wireframes show the basic layout structure of key pages. The colored boxes represent different UI areas. Think of them as blueprints for a house — showing where each room goes before you decorate!</p>
+
+    <!-- Wireframe 1: Home Page -->
+    <h3>📱 1. Home Page (Mobile)</h3>
+    <div class="wireframe" style="max-width: 375px; margin: 20px auto;">
+      <div class="wireframe-title">/ — Home Page</div>
+      <div class="wire-box header">📱 Status Bar</div>
+      <div class="wire-box header" style="display:flex; justify-content:space-between; padding: 12px 16px;">
+        <span>TCL × Arsenal Logo</span>
+        <span>🔔</span>
+      </div>
+      <div class="wire-box hero-area" style="min-height: 160px; flex-direction: column;">
+        <div>🖼️ Hero Carousel</div>
+        <div style="font-size:10px; margin-top:8px;">← Swipe between slides →</div>
+        <div style="display:flex; gap:4px; margin-top:8px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--text-muted);display:block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--text-muted);display:block;"></span>
+        </div>
+      </div>
+      <div class="wire-box card">📊 Campaign Status Banner</div>
+      <div style="padding: 4px 0;">
+        <div style="font-size:11px; color:var(--text-muted); padding:8px 0;">⚽ Upcoming Matches</div>
+        <div class="wire-box card">Match Card: Team A vs Team B — 3:00 PM</div>
+        <div class="wire-box card">Match Card: Team C vs Team D — 5:00 PM</div>
+      </div>
+      <div style="padding: 4px 0;">
+        <div style="font-size:11px; color:var(--text-muted); padding:8px 0;">📊 Standings Preview</div>
+        <div class="wire-box content">Group A table (top 4 rows)</div>
+      </div>
+      <div style="padding: 4px 0;">
+        <div style="font-size:11px; color:var(--text-muted); padding:8px 0;">🏟️ Teams</div>
+        <div style="display:flex; gap:6px; overflow:hidden;">
+          <div class="wire-box card" style="min-width:80px;">Team 1</div>
+          <div class="wire-box card" style="min-width:80px;">Team 2</div>
+          <div class="wire-box card" style="min-width:80px;">Team 3</div>
+          <div class="wire-box card" style="min-width:80px;">Team 4</div>
+        </div>
+      </div>
+      <div class="wire-box nav" style="display:flex; justify-content:space-around; padding:12px;">
+        <span>🏠</span>
+        <span>⚽</span>
+        <span>📊</span>
+        <span>🏟️</span>
+        <span>•••</span>
+      </div>
+    </div>
+
+    <!-- Wireframe 2: Matches Page -->
+    <h3>⚽ 2. Matches Page</h3>
+    <div class="wireframe" style="max-width: 375px; margin: 20px auto;">
+      <div class="wireframe-title">/matches — All Matches</div>
+      <div class="wire-box header" style="display:flex; justify-content:space-between;">
+        <span>← Back</span>
+        <span>⚽ Matches</span>
+        <span>🔍</span>
+      </div>
+      <div style="display:flex; gap:6px; padding:8px 0; overflow:hidden;">
+        <div class="wire-box action" style="flex:none; padding:6px 12px;">All</div>
+        <div class="wire-box" style="flex:none; padding:6px 12px;">Day 1</div>
+        <div class="wire-box" style="flex:none; padding:6px 12px;">Day 2</div>
+        <div class="wire-box" style="flex:none; padding:6px 12px;">Day 3</div>
+      </div>
+      <div style="display:flex; gap:6px; padding:4px 0;">
+        <div class="wire-box" style="padding:6px 10px;">Live</div>
+        <div class="wire-box" style="padding:6px 10px;">Upcoming</div>
+        <div class="wire-box" style="padding:6px 10px;">Completed</div>
+      </div>
+      <div class="wire-box card" style="padding:16px;">
+        <div style="font-size:10px; color:var(--text-muted);">Group A — Pitch 1 — 3:00 PM</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin:8px 0;">
+          <span>🏟️ Team Alpha</span>
+          <span style="color:var(--gold); font-weight:bold;">2 - 1</span>
+          <span>Team Beta 🏟️</span>
+        </div>
+        <div style="font-size:10px; color:var(--green);">✅ COMPLETED</div>
+      </div>
+      <div class="wire-box card" style="padding:16px;">
+        <div style="font-size:10px; color:var(--text-muted);">Group B — Pitch 2 — 5:00 PM</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin:8px 0;">
+          <span>🏟️ Team Gamma</span>
+          <span style="color:var(--red); font-weight:bold;">LIVE 1-0</span>
+          <span>Team Delta 🏟️</span>
+        </div>
+        <div style="font-size:10px; color:var(--red);">⚽ LIVE_FIRST_HALF — 23'</div>
+      </div>
+      <div class="wire-box card" style="padding:16px;">
+        <div style="font-size:10px; color:var(--text-muted);">Group A — Pitch 1 — 7:00 PM</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin:8px 0;">
+          <span>🏟️ Team Epsilon</span>
+          <span style="color:var(--text-muted);">vs</span>
+          <span>Team Zeta 🏟️</span>
+        </div>
+        <div style="font-size:10px; color:var(--blue);">⏰ SCHEDULED</div>
+      </div>
+      <div class="wire-box nav" style="display:flex; justify-content:space-around; padding:12px;">
+        <span>🏠</span>
+        <span style="color:var(--red);">⚽</span>
+        <span>📊</span>
+        <span>🏟️</span>
+        <span>•••</span>
+      </div>
+    </div>
+
+    <!-- Wireframe 3: Admin Dashboard -->
+    <h3>🔧 3. Admin Dashboard</h3>
+    <div class="wireframe">
+      <div class="wireframe-title">/admin — Dashboard</div>
+      <div class="wire-admin-layout">
+        <div class="wire-box sidebar-area wire-admin-sidebar" style="display:flex; flex-direction:column; gap:4px; text-align:left; padding:8px;">
+          <div style="font-weight:bold; color:var(--red); margin-bottom:8px;">🔧 Admin</div>
+          <div style="color:var(--cyan);">📊 Dashboard</div>
+          <div>🏆 Campaign</div>
+          <div>⚽ Matches</div>
+          <div>🏟️ Teams</div>
+          <div>📊 Standings</div>
+          <div>🖼️ Hero Slides</div>
+          <div>📝 Content</div>
+          <div>❓ FAQ</div>
+          <div>🎬 Highlights</div>
+          <div>🏆 Prizes</div>
+          <div>🎪 Zone</div>
+          <div>🔔 Notifications</div>
+          <div>📋 Applications</div>
+          <div>👤 Users</div>
+        </div>
+        <div class="wire-box header" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>📊 Dashboard Overview</span>
+          <span>👤 Admin User ▾</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="wire-grid-4">
+            <div class="wire-box card">
+              <div style="font-size:24px; font-weight:bold;">16</div>
+              <div style="font-size:10px;">Teams</div>
+            </div>
+            <div class="wire-box card">
+              <div style="font-size:24px; font-weight:bold;">31</div>
+              <div style="font-size:10px;">Matches</div>
+            </div>
+            <div class="wire-box card">
+              <div style="font-size:24px; font-weight:bold;">4</div>
+              <div style="font-size:10px;">Live Now</div>
+            </div>
+            <div class="wire-box card">
+              <div style="font-size:24px; font-weight:bold;">247</div>
+              <div style="font-size:10px;">Users</div>
+            </div>
+          </div>
+          <div class="wire-row">
+            <div class="wire-box content" style="min-height:100px;">
+              📊 Recent Matches<br>(list of latest results)
+            </div>
+            <div class="wire-box content" style="min-height:100px;">
+              📋 Quick Actions<br>
+              <div style="margin-top:8px;">
+                <span class="wire-box action" style="display:inline-block; margin:2px;">+ New Match</span>
+                <span class="wire-box action" style="display:inline-block; margin:2px;">Recalc Standings</span>
+                <span class="wire-box action" style="display:inline-block; margin:2px;">Send Notification</span>
+              </div>
+            </div>
+          </div>
+          <div class="wire-box content" style="min-height:80px;">
+            📢 Recent Notifications Sent
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wireframe 4: Admin Match Detail -->
+    <h3>⚽ 4. Admin Match Detail & Scoring</h3>
+    <div class="wireframe">
+      <div class="wireframe-title">/admin/matches/[matchId] — Live Scoring</div>
+      <div class="wire-box header" style="display:flex; justify-content:space-between;">
+        <span>← Back to Matches</span>
+        <span>⚽ Match #7 — Group A</span>
+        <span style="color:var(--red);">● LIVE</span>
+      </div>
+      <div class="wire-row" style="margin-top:8px;">
+        <div class="wire-box card" style="text-align:center; padding:20px;">
+          <div style="font-size:10px; color:var(--text-muted);">HOME</div>
+          <div style="font-size:18px; margin:8px 0;">🏟️ Team Alpha</div>
+          <div style="font-size:36px; font-weight:bold; color:var(--gold);">2</div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--text-muted);">vs</div>
+        <div class="wire-box card" style="text-align:center; padding:20px;">
+          <div style="font-size:10px; color:var(--text-muted);">AWAY</div>
+          <div style="font-size:18px; margin:8px 0;">Team Beta 🏟️</div>
+          <div style="font-size:36px; font-weight:bold; color:var(--gold);">1</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:6px; margin:12px 0; flex-wrap:wrap;">
+        <div class="wire-box action">▶️ Start 2nd Half</div>
+        <div class="wire-box" style="border-color:var(--red); color:var(--red);">🏁 Full Time</div>
+        <div class="wire-box" style="border-color:var(--orange); color:var(--orange);">⏸️ Postpone</div>
+      </div>
+      <div style="margin:8px 0;">
+        <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;">📋 Match Events</div>
+        <div class="wire-box card" style="text-align:left; padding:8px 12px;">
+          <span style="color:var(--green);">⚽ 12'</span> — Ahmed (Home) — GOAL
+        </div>
+        <div class="wire-box card" style="text-align:left; padding:8px 12px;">
+          <span style="color:var(--gold);">🟨 18'</span> — Ali (Away) — YELLOW CARD
+        </div>
+        <div class="wire-box card" style="text-align:left; padding:8px 12px;">
+          <span style="color:var(--green);">⚽ 31'</span> — Omar (Home) — GOAL
+        </div>
+        <div class="wire-box card" style="text-align:left; padding:8px 12px;">
+          <span style="color:var(--green);">⚽ 42'</span> — Khalid (Away) — GOAL
+        </div>
+      </div>
+      <div class="wire-box action" style="text-align:center; padding:12px;">
+        ➕ Add New Event (Goal / Card / Substitution)
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 15: TECH STACK VISUAL -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-15">
+    <div class="section-header">
+      <div class="section-number">15</div>
+      <span class="section-emoji">🛠️</span>
+      <h2>Tech Stack Visual</h2>
+    </div>
+
+    <div class="analogy">The tech stack is like the <strong>tools in a kitchen</strong>. Next.js is the kitchen itself. React is the chef. Prisma is the recipe translator. PostgreSQL is the fridge. Tailwind is the set of fancy plates. And Vercel is the restaurant building that holds it all together!</div>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-icon">⚡</div>
+        <div class="tech-name">Next.js</div>
+        <div class="tech-version">v16.2.1</div>
+        <div class="tech-role">The Full-Stack Framework — the backbone of the app. Handles both the frontend pages and backend API routes.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">⚛️</div>
+        <div class="tech-name">React</div>
+        <div class="tech-version">v19</div>
+        <div class="tech-role">The UI Library — builds all the interactive buttons, cards, and pages you see on screen.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">🔮</div>
+        <div class="tech-name">Prisma</div>
+        <div class="tech-version">v7</div>
+        <div class="tech-role">The Database ORM — translates JavaScript code into SQL so we can talk to PostgreSQL easily.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">🐘</div>
+        <div class="tech-name">PostgreSQL</div>
+        <div class="tech-version">Neon Serverless</div>
+        <div class="tech-role">The Database — stores ALL data (teams, matches, users). Hosted on Neon for serverless scaling.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">🎨</div>
+        <div class="tech-name">Tailwind CSS</div>
+        <div class="tech-version">v4</div>
+        <div class="tech-role">The Styling Tool — makes everything look beautiful with utility classes. Dark theme, responsive design.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">📦</div>
+        <div class="tech-name">TanStack Query</div>
+        <div class="tech-version">v5</div>
+        <div class="tech-role">The Data Fetching Library — caches API responses so the app feels instant. Auto-refetches when needed.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">✅</div>
+        <div class="tech-name">Zod</div>
+        <div class="tech-version">v4</div>
+        <div class="tech-role">The Validation Library — checks that incoming data is correct before saving. Like a bouncer at the door.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">🎫</div>
+        <div class="tech-name">JWT / jose</div>
+        <div class="tech-version">jose library</div>
+        <div class="tech-role">The Auth Tokens — creates secure "wristbands" (tokens) that prove who you are. HTTP-only cookies.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">☁️</div>
+        <div class="tech-name">Cloudinary</div>
+        <div class="tech-version">CDN</div>
+        <div class="tech-role">The Media Host — stores and serves all images and videos super fast from servers around the world.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">🚀</div>
+        <div class="tech-name">Vercel</div>
+        <div class="tech-version">Serverless</div>
+        <div class="tech-role">The Hosting Platform — runs the app on the cloud. Auto-deploys from GitHub. Zero config.</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">🧩</div>
+        <div class="tech-name">Radix UI</div>
+        <div class="tech-version">Primitives</div>
+        <div class="tech-role">The Component Library — provides accessible, unstyled building blocks (dialogs, dropdowns, tabs).</div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon">✨</div>
+        <div class="tech-name">Lucide Icons</div>
+        <div class="tech-version">React</div>
+        <div class="tech-role">The Icon Set — beautiful, consistent icons used throughout the UI for buttons and navigation.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 16: QUICK REFERENCE CARDS -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-16">
+    <div class="section-header">
+      <div class="section-number">16</div>
+      <span class="section-emoji">📇</span>
+      <h2>Quick Reference Cards</h2>
+    </div>
+
+    <p>Print these out and keep them handy! They contain the most important information you'll need when working with the app.</p>
+
+    <!-- Card 1: Key URLs -->
+    <div class="ref-card">
+      <h4>🔗 Key URLs</h4>
+      <table>
+        <tr><th>Resource</th><th>URL</th></tr>
+        <tr><td>🌐 Live App (Public)</td><td><code>https://tcl-app.vercel.app</code></td></tr>
+        <tr><td>🔧 Admin Portal</td><td><code>https://tcl-app.vercel.app/admin</code></td></tr>
+        <tr><td>🔐 Login Page</td><td><code>https://tcl-app.vercel.app/login</code></td></tr>
+        <tr><td>💻 GitHub Repository</td><td><code>https://github.com/nkhank1991/tcl-rtg-2026</code></td></tr>
+        <tr><td>🐘 Neon Database Console</td><td><code>https://console.neon.tech</code></td></tr>
+        <tr><td>☁️ Cloudinary Dashboard</td><td><code>https://console.cloudinary.com</code></td></tr>
+        <tr><td>🚀 Vercel Dashboard</td><td><code>https://vercel.com/dashboard</code></td></tr>
+      </table>
+    </div>
+
+    <!-- Card 2: Default Credentials -->
+    <div class="ref-card">
+      <h4>🔑 Default Admin Credentials</h4>
+      <div class="info-box warning">
+        <strong>⚠️ For Development/Testing Only!</strong> Change these in production!
+      </div>
+      <table>
+        <tr><th>Field</th><th>Value</th></tr>
+        <tr><td>📱 Admin Phone</td><td><code>+971500000000</code></td></tr>
+        <tr><td>🔢 OTP Code</td><td><code>123456</code></td></tr>
+        <tr><td>👤 Role</td><td>ADMIN / SUPER_ADMIN</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 3: Environment Variables -->
+    <div class="ref-card">
+      <h4>🌿 Environment Variables</h4>
+      <table>
+        <tr><th>Variable</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td><code>DATABASE_URL</code></td><td>PostgreSQL connection string</td><td><code>postgresql://user:pass@host/db</code></td></tr>
+        <tr><td><code>JWT_SECRET</code></td><td>Secret key for signing JWT tokens</td><td><code>your-super-secret-key-here</code></td></tr>
+        <tr><td><code>NEXT_PUBLIC_APP_URL</code></td><td>Public URL of the app</td><td><code>https://tcl-app.vercel.app</code></td></tr>
+        <tr><td><code>CLOUDINARY_CLOUD_NAME</code></td><td>Cloudinary account name</td><td><code>my-cloud</code></td></tr>
+        <tr><td><code>CLOUDINARY_API_KEY</code></td><td>Cloudinary API key</td><td><code>123456789</code></td></tr>
+        <tr><td><code>CLOUDINARY_API_SECRET</code></td><td>Cloudinary API secret</td><td><code>abc123secret</code></td></tr>
+      </table>
+    </div>
+
+    <!-- Card 4: Important Commands -->
+    <div class="ref-card">
+      <h4>💻 Important Commands</h4>
+      <table>
+        <tr><th>Command</th><th>What It Does</th></tr>
+        <tr><td><code>npm run dev</code></td><td>🏃 Start the app locally (http://localhost:3000)</td></tr>
+        <tr><td><code>npm run build</code></td><td>🏗️ Build for production</td></tr>
+        <tr><td><code>npx prisma generate</code></td><td>🔮 Generate Prisma Client from schema</td></tr>
+        <tr><td><code>npx prisma db push</code></td><td>📤 Push schema changes to database</td></tr>
+        <tr><td><code>npx prisma migrate dev</code></td><td>📋 Create a new migration</td></tr>
+        <tr><td><code>npx prisma studio</code></td><td>🖥️ Open visual database editor (browser)</td></tr>
+        <tr><td><code>npx prisma db seed</code></td><td>🌱 Fill database with sample data</td></tr>
+        <tr><td><code>npm run lint</code></td><td>🔍 Check code for errors & style issues</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 5: Emergency Procedures -->
+    <div class="ref-card">
+      <h4>🚨 Emergency Procedures</h4>
+      <table>
+        <tr><th>Scenario</th><th>Action</th></tr>
+        <tr><td>🔴 Site is down</td><td>Check Vercel dashboard for deployment status. Check Neon for DB status.</td></tr>
+        <tr><td>🔴 Database error</td><td>Go to Neon console → check connection pool → restart if needed.</td></tr>
+        <tr><td>🔴 Wrong score published</td><td>Admin portal → Matches → Edit match → Fix score → Recalculate standings.</td></tr>
+        <tr><td>🔴 Can't login</td><td>Check if OTP is being generated (check DB or console). Verify JWT_SECRET is set.</td></tr>
+        <tr><td>🔴 Images broken</td><td>Check Cloudinary dashboard. Verify CLOUDINARY_* env vars are correct.</td></tr>
+        <tr><td>🔴 Need to rollback</td><td>Vercel dashboard → Deployments → Click on previous deployment → Promote to Production.</td></tr>
+      </table>
+    </div>
+
+    <!-- Card 6: File Structure -->
+    <div class="ref-card">
+      <h4>📁 Project File Structure</h4>
+      <pre><code>tcl-app/
+├── prisma/
+│   └── schema.prisma          # Database schema (27+ models)
+├── src/
+│   ├── app/
+│   │   ├── (admin)/admin/     # Admin pages (15 pages)
+│   │   ├── (site)/(public)/   # Public pages (12 pages)
+│   │   ├── (site)/(captain)/  # Captain pages (5 pages)
+│   │   ├── (site)/(auth)/     # Auth pages (login)
+│   │   └── api/               # API routes (46 routes)
+│   │       ├── admin/         # Admin-only APIs
+│   │       ├── auth/          # Auth APIs (OTP)
+│   │       └── *.ts           # Public APIs
+│   ├── components/            # Reusable React components
+│   ├── hooks/                 # Custom React hooks
+│   ├── lib/                   # Utilities (auth, prisma, etc.)
+│   └── types/                 # TypeScript type definitions
+├── public/                    # Static files (images, fonts)
+├── package.json               # Dependencies & scripts
+└── vercel.json                # Vercel config</code></pre>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 17: GLOSSARY -->
+  <!-- ============================================================ -->
+  <section class="section" id="section-17">
+    <div class="section-header">
+      <div class="section-number">17</div>
+      <span class="section-emoji">📖</span>
+      <h2>Glossary</h2>
+    </div>
+
+    <p>Here are simple definitions for all the technical terms used in this documentation. We explain them like you're five — no jargon, just plain English!</p>
+
+    <div class="glossary-grid">
+      <div class="glossary-item">
+        <div class="glossary-term">API (Application Programming Interface)</div>
+        <div class="glossary-def">🍽️ Like a <strong>waiter at a restaurant</strong>. You tell the waiter what you want (request), the waiter goes to the kitchen (server), and brings back your food (response). APIs let different parts of the app talk to each other.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">JWT (JSON Web Token)</div>
+        <div class="glossary-def">🎫 Like a <strong>wristband at a concert</strong>. Once you prove who you are at the gate, you get a wristband. Security guards just check your wristband without asking you to prove yourself again.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">OTP (One-Time Password)</div>
+        <div class="glossary-def">🔑 Like a <strong>temporary secret knock</strong>. It works once and expires quickly. You get a special code on your phone that you use to prove it's really you.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">CRUD</div>
+        <div class="glossary-def">📝 The four basic things you can do with data: <strong>C</strong>reate (add new), <strong>R</strong>ead (look at), <strong>U</strong>pdate (change), <strong>D</strong>elete (remove). Like adding a new contact, reading it, editing the number, or deleting it.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">CMS (Content Management System)</div>
+        <div class="glossary-def">📰 Like a <strong>newspaper editor's desk</strong>. It's where admins write and manage all the content that appears on the website — without needing to touch any code.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">CDN (Content Delivery Network)</div>
+        <div class="glossary-def">📬 Like having <strong>post offices in every neighborhood</strong> instead of one central one. Images and files are copied to servers around the world so they load fast no matter where you are.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">ORM (Object-Relational Mapping)</div>
+        <div class="glossary-def">🗣️ Like a <strong>translator</strong>. Our code speaks JavaScript, and the database speaks SQL. The ORM (Prisma) translates between them so they can understand each other.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Serverless</div>
+        <div class="glossary-def">☁️ Like an <strong>on-demand taxi</strong> vs owning a car. Instead of running a server 24/7, the cloud spins up a mini-server just when someone needs it, then shuts it down. Pay only for what you use!</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Middleware</div>
+        <div class="glossary-def">🚧 Like a <strong>security checkpoint</strong>. Every request passes through it before reaching the page. It checks things like "are you logged in?" and "are you allowed here?"</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Migration</div>
+        <div class="glossary-def">🏗️ Like a <strong>renovation plan</strong> for your database. When you need to add a new room (table) or change the layout, you create a migration that safely makes those changes.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Seed</div>
+        <div class="glossary-def">🌱 Like <strong>planting sample flowers</strong> in a new garden. Seeding fills an empty database with sample/test data so you have something to work with during development.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">SSR (Server-Side Rendering)</div>
+        <div class="glossary-def">🎁 Like <strong>gift-wrapping before delivery</strong>. The server prepares the complete HTML page before sending it to your browser, so it loads faster than building it piece by piece in the browser.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Cookie</div>
+        <div class="glossary-def">🍪 A <strong>tiny note</strong> that the website saves in your browser. It remembers things like "this person is logged in" so you don't have to log in every time you visit a new page.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Enum</div>
+        <div class="glossary-def">📋 A <strong>fixed list of options</strong>. Like a dropdown menu with only specific choices. For example, MatchStatus can ONLY be SCHEDULED, LIVE_FIRST_HALF, etc. — nothing else.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Schema</div>
+        <div class="glossary-def">📐 The <strong>blueprint</strong> of your database. It defines what tables exist, what columns they have, and how they're connected — like an architect's plan before building a house.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Endpoint</div>
+        <div class="glossary-def">🚪 A specific <strong>door</strong> in the API. Each endpoint is a URL that does one thing. <code>/api/matches</code> is the door for getting match data. <code>/api/teams</code> is the door for team data.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Cache</div>
+        <div class="glossary-def">📸 Like taking a <strong>photo of a menu</strong> so you don't have to read it again. The app remembers data it already fetched, so it doesn't need to ask the server again right away.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Deployment</div>
+        <div class="glossary-def">🚀 The process of <strong>putting your code on the internet</strong> so real people can use it. Like printing your book and putting it on store shelves for customers to buy.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">PWA (Progressive Web App)</div>
+        <div class="glossary-def">📱 A website that <strong>behaves like a phone app</strong>. You can add it to your home screen, and it works even with a shaky internet connection. No app store needed!</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">TypeScript</div>
+        <div class="glossary-def">🏷️ JavaScript with <strong>labels on everything</strong>. It adds "type safety" — so if a function expects a number, it won't accidentally get a word. Catches mistakes before they become bugs.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Webhook</div>
+        <div class="glossary-def">📞 Like a <strong>phone call from a friend</strong>. Instead of you checking if something happened, the system calls YOU automatically when something important happens.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Component</div>
+        <div class="glossary-def">🧱 A <strong>reusable building block</strong>. Like LEGO pieces — you build a "MatchCard" component once, and then use it 31 times (once for each match) without rewriting the code.</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Hook (React)</div>
+        <div class="glossary-def">🎣 A <strong>special function</strong> that lets components "hook into" React features. Like <code>useState</code> (remember a value) or <code>useEffect</code> (do something when the page loads).</div>
+      </div>
+
+      <div class="glossary-item">
+        <div class="glossary-term">Route</div>
+        <div class="glossary-def">🛣️ A <strong>path/address</strong> in the app. Like street addresses — <code>/matches</code> takes you to the matches page, <code>/admin</code> takes you to the admin area.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================================ -->
+  <footer style="text-align:center; padding:40px; border-top:1px solid var(--border); color:var(--text-muted); font-size:13px;">
+    <p style="color:var(--red); font-weight:700; font-size:16px; margin-bottom:8px;">TCL × Arsenal — Road to Greatness 2026</p>
+    <p>Inspire It. Dream It. Do It.</p>
+    <p style="margin-top:16px;">Documentation generated on March 26, 2026</p>
+    <p>Built with Next.js 16 · React 19 · Prisma 7 · PostgreSQL · Tailwind CSS 4</p>
+    <p style="margin-top:16px; font-size:11px; color:var(--text-muted);">This is a self-contained HTML document. Open in any modern browser. Print to PDF for offline use.</p>
+  </footer>
+
+</div><!-- end .main -->
+
+<!-- ===== MERMAID INIT ===== -->
+<script>
+  // Initialize Mermaid with dark theme
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#E4002B',
+      primaryTextColor: '#ffffff',
+      primaryBorderColor: '#E4002B',
+      lineColor: '#6B6B80',
+      secondaryColor: '#1A1A25',
+      tertiaryColor: '#12121A',
+      background: '#0A0A0F',
+      mainBkg: '#1A1A25',
+      nodeBorder: '#E4002B',
+      clusterBkg: '#12121A',
+      clusterBorder: '#2A2A3A',
+      titleColor: '#ffffff',
+      edgeLabelBackground: '#1A1A25',
+      actorTextColor: '#ffffff',
+      actorBkg: '#1A1A25',
+      actorBorder: '#E4002B',
+      signalColor: '#ffffff',
+      signalTextColor: '#ffffff',
+      labelBoxBkgColor: '#1A1A25',
+      labelBoxBorderColor: '#E4002B',
+      labelTextColor: '#ffffff',
+      loopTextColor: '#ffffff',
+      noteBkgColor: '#1A1A25',
+      noteBorderColor: '#E4002B',
+      noteTextColor: '#ffffff',
+      activationBkgColor: '#E4002B',
+      activationBorderColor: '#E4002B'
+    },
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true,
+      curve: 'basis'
+    },
+    sequence: {
+      useMaxWidth: true,
+      wrap: true,
+      width: 200
+    }
+  });
+
+  // Sidebar active link tracking
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -80% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        document.querySelectorAll('.toc-list a').forEach(a => a.classList.remove('active'));
+        const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('section[id]').forEach(section => {
+    observer.observe(section);
+  });
+
+  // Close sidebar on mobile when clicking a link
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        document.querySelector('.sidebar').classList.remove('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
   "buildCommand": "npx prisma generate && next build",
   "framework": "nextjs",
-  "regions": ["dxb1"],
+  "regions": ["bom1"],
   "headers": [
     {
       "source": "/sw.js",
