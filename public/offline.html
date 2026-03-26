@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline | TCL × Arsenal Road to Greatness 2026</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0A0A0F;
+      color: #FFFFFF;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .logo-tcl {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #FFFFFF;
+    }
+    .logo-divider {
+      width: 2px;
+      height: 2rem;
+      background: #E4002B;
+    }
+    .logo-arsenal {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #E4002B;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1.5rem;
+      opacity: 0.5;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    p {
+      color: #9CA3AF;
+      font-size: 1rem;
+      line-height: 1.5;
+      max-width: 360px;
+      margin-bottom: 2rem;
+    }
+    .retry-btn {
+      display: inline-block;
+      background: #E4002B;
+      color: #FFFFFF;
+      border: none;
+      padding: 0.875rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .retry-btn:hover { background: #C8001F; }
+    .retry-btn:active { background: #A00018; }
+    .footer {
+      position: absolute;
+      bottom: 2rem;
+      color: #4B5563;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <span class="logo-tcl">TCL</span>
+    <span class="logo-divider"></span>
+    <span class="logo-arsenal">Arsenal</span>
+  </div>
+
+  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="1" y1="1" x2="23" y2="23" />
+    <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55" />
+    <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39" />
+    <path d="M10.71 5.05A16 16 0 0 1 22.56 9" />
+    <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88" />
+    <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+    <line x1="12" y1="20" x2="12.01" y2="20" />
+  </svg>
+
+  <h1>You're Offline</h1>
+  <p>It looks like you've lost your internet connection. Check your network and try again to get back to the action.</p>
+
+  <button class="retry-btn" onclick="window.location.reload()">Retry Connection</button>
+
+  <div class="footer">Road to Greatness 2026</div>
+</body>
+</html>
